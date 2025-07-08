@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apple Shimla - Product Description</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8fff5;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .description {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .description h2 {
+      margin-top: 0;
+    }
+
+    .features, .details {
+      margin-top: 20px;
+    }
+
+    .features ul, .details ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features ul li::before, .details ul li::before {
+      content: "– ";
+    }
+
+    .product {
+      text-align: center;
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .product img {
+      width: 180px;
+      height: auto;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2d4d2d;
+      margin: 10px 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .add {
+      background-color: #d8f4c5;
+    }
+
+    .buy {
+      background-color: #6ebd44;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="description">
+      <h2>Product Description</h2>
+      <p>The Robusta Banana is medium to large, with a thin yellowish-green skin that turns yellow upon ripening. Its flesh is soft in texture and has a sugary taste and aroma. It makes a perfectly satisfying choice for bread and cakes and is ideal for fruit salads.</p>
+
+      <div class="features">
+        <h3>Key Features</h3>
+        <ul>
+          <li>Delicious Banana</li>
+<li>>Hygienically packaged</li>
+<li>>Generic name - Banana</li>
+          
+        </ul>
+      </div>
+
+      <div class="details">
+        <h3>Product Details</h3>
+        <ul>
+          <li>Weight: 500gm, 1kg, 2kg, 5kg</li>
+          <li>Packaging: Food-grade packaging to ensure freshness</li>
+          <li>Shelf Life: 7–10 days from delivery date</li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="images/rbanana.jpg" alt="Banana Robusta" />
+      <h3>Banana Robusta</h3>
+      <p>500 GM</p>
+      <div class="price">₹27</div>
+      <p>Quality No: 1</p>
+      <p>❤️ In Stock: 10</p>
+
+      <div class="buttons">
+        <button class="add" onclick="addToCart()">Add to cart</button>
+        <button class="buy">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addToCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const product = {
+        name: "Banana Robusta",
+        weight: "500 GM",
+        price: 27,
+        img: "images/rbanana.jpg",
+        quantity: 1
+      };
+
+      const existing = cart.find(item => item.name === product.name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Banana Robusta added to cart!");
+    }
+  </script>
+</body>
+</html>

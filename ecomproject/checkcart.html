@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>My Cart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ed;
+      color: #333;
+    }
+    .header {
+      background-color: #2d4d2d;
+      color: white;
+      padding: 20px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+    .header p {
+      margin-top: 5px;
+      font-size: 20px;
+      color: #b2d8b2;
+    }
+    .cart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      background-color: #e7f6dc;
+      border-radius: 10px;
+      margin: 20px;
+    }
+    .product-info {
+      display: flex;
+      gap: 20px;
+    }
+    .product-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 10px;
+      background-color: white;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .details h3 {
+      margin: 0;
+    }
+    .details .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2d4d2d;
+    }
+    .details .save {
+      margin-top: 10px;
+      color: crimson;
+    }
+    .bill-summary {
+      display: flex;
+      justify-content: space-around;
+      background-color: #d7f2bf;
+      padding: 20px;
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+    .bill-item {
+      flex: 1 1 200px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .bill-item h4 {
+      margin: 5px 0;
+      color: #333;
+    }
+    .checkout-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 40px;
+      font-size: 18px;
+      background-color: #6ebd44;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .checkout-btn:hover {
+      background-color: #5aaa3b;
+    }.checkout-btn {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.checkout-btn:hover {
+  background-color: #45a049;
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>My Cart</h1>
+    <p id="itemCount">0 Items</p>
+  </div>
+<body>
+ 
+
+  <div class="cart-container">
+    <div id="cartItems"></div>
+
+    <div class="bill-summary">
+      <div class="bill-item">
+        <h4>Total qty</h4>
+        <div id="qty">0</div>
+      </div>
+      <div class="bill-item">
+        <h4>Subtotal</h4>
+        <div id="subtotal">₹0</div>
+      </div>
+      <div class="bill-item">
+        <h4>Handling Fee</h4>
+        <div id="fee">₹10</div>
+      </div>
+      <div class="bill-item">
+        <h4>Total Payable</h4>
+        <div id="total">₹0</div>
+      </div>
+    </div>
+  </div>
+
+
+  <button class="checkout-btn" onclick="placeOrder()">Buy Now</button>
+  <a href="images/bill.html" class="checkout-btn">🧾 View & Print Bill</a>
+
+
+  <script>
+    const cartItemsContainer = document.getElementById('cartItems');
+    const itemCount = document.getElementById('itemCount');
+    const subtotalDiv = document.getElementById('subtotal');
+    const qtyDiv = document.getElementById('qty');
+    const totalDiv = document.getElementById('total');
+    const fee = 10;
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    let totalQty = 0;
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.classList.add('product-info');
+      div.innerHTML = `
+        <img class="product-img" src="${item.img}" alt="${item.name}">
+        <div class="details">
+          <h3>${item.name}</h3>
+          <div class="price">₹${item.price}</div>
+          <div>Qty: ${item.quantity}</div>
+          <div class="save">❤️ Save For later</div>
+        </div>
+      `;
+      cartItemsContainer.appendChild(div);
+
+      totalQty += item.quantity;
+      subtotal += item.quantity * item.price;
+    });
+
+    itemCount.textContent = `${cart.length} Item${cart.length !== 1 ? 's' : ''}`;
+    qtyDiv.textContent = totalQty;
+    subtotalDiv.textContent = `₹${subtotal.toFixed(2)}`;
+    totalDiv.textContent = `₹${(subtotal + fee).toFixed(2)}`;
+
+    function placeOrder() {
+      alert(" Your order has been placed successfully!");
+      localStorage.removeItem('cart');
+      location.reload();
+    }
+  </script>
+</body>
+</html>

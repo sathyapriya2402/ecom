@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"> 
+  <title>Fruits</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ed;
+      margin: 20px;
+    }
+    .container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .card {
+      background: #d3f0c8;
+      border-radius: 10px;
+      width: 160px;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+    .card h4 {
+      margin: 10px 0 5px;
+    }
+    .card p {
+      margin: 0;
+      font-size: 13px;
+    }
+    .price {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .add-btn {
+      margin-top: 10px;
+      background: #fff;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .qty-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qty-controls button {
+      background-color: #fff;
+      border: 1px solid #6ebd44;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #6ebd44;
+    }
+
+    .qty-controls span {
+      font-weight: bold;
+    }
+
+    .cart {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="productContainer">
+    
+  </div>
+
+  <script>
+  let products = [
+    { name: "Apple Royalgala", weight: "500 GM", price: 124.5, img: "images/royal gala.jpg", quantity: 0 },
+    { name: "Apple Shimla", weight: "500 GM", price: 114.5, img: "images/simla.jpg", quantity: 0 },
+    { name: "Banana Robusta", weight: "500 GM", price: 27.5, img: "images/rbanana.jpg", quantity: 0 },
+    { name: "Banana Yelakki", weight: "500 GM", price: 62.5, img: "images/ybanana.jpg", quantity: 0 },
+    { name: "Orange Nagpur", weight: "500 GM", price: 59.5, img: "images/norange.jpg", quantity: 0 },
+    { name: "Guava Prepack", weight: "300 GM", price: 38.7, img: "images/guava.jpg", quantity: 0 }
+  ];
+
+  // Load saved cart data
+  const savedCart = JSON.parse(localStorage.getItem('cart'));
+  if (savedCart) {
+    savedCart.forEach(savedItem => {
+      const match = products.find(p => p.name === savedItem.name);
+      if (match) match.quantity = savedItem.quantity;
+    });
+  }
+
+  function renderProducts() {
+    const container = document.getElementById('productContainer');
+    container.innerHTML = '';
+    products.forEach((product, index) => {
+      container.innerHTML += `
+        <div class="card">
+          <img src="${product.img}" alt="${product.name}">
+          <h4>${product.name}</h4>
+          <p>${product.weight}</p>
+          <p class="price">₹${product.price}</p>
+          <div class="qty-controls">
+            <button onclick="decreaseQty(${index})">–</button>
+            <span>${product.quantity}</span>
+            <button onclick="increaseQty(${index})">+</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function updateCartStorage() {
+    const cartItems = products.filter(product => product.quantity > 0);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+      const totalQty = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalQty;
+    }
+  }
+
+  function increaseQty(index) {
+    products[index].quantity++;
+    renderProducts();
+    displayCart();
+    updateCartStorage();
+  }
+
+  function decreaseQty(index) {
+    if (products[index].quantity > 0) {
+      products[index].quantity--;
+      renderProducts();
+      displayCart();
+      updateCartStorage();
+    }
+  }
+
+  function displayCart() {
+    const cartList = document.getElementById('cartList');
+    if (cartList) {
+      cartList.innerHTML = '';
+      products.forEach(product => {
+        if (product.quantity > 0) {
+          const li = document.createElement('li');
+          li.textContent = `${product.name} x ${product.quantity} = ₹${(product.price * product.quantity).toFixed(2)}`;
+          cartList.appendChild(li);
+        }
+      });
+    }
+  }
+
+  renderProducts();
+  </script>
+</body>
+</html>

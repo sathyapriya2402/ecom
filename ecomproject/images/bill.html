@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bill</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+
+    .bill-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 8px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .print-btn {
+      background: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .print-btn:hover {
+      background: #43a047;
+    }
+  </style>
+</head>
+<body>
+  <div class="bill-container" id="bill">
+    <h2>🧾 GroceryHub Bill</h2>
+
+    <div class="form-group">
+      <label for="custName"><strong>Customer Name:</strong></label>
+      <input type="text" id="custName" oninput="updateName()" placeholder="Enter your name" />
+    </div>
+
+    <p><strong>Name:</strong> <span id="nameDisplay">________</span></p>
+
+    <table id="billTable">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Products will be inserted here -->
+      </tbody>
+    </table>
+
+    <p class="total">Grand Total: ₹<span id="grandTotal">0</span></p>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print Bill</button>
+  </div>
+
+  <script>
+    function updateName() {
+      const name = document.getElementById("custName").value;
+      document.getElementById("nameDisplay").textContent = name || "________";
+    }
+
+    function loadBill() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const tbody = document.querySelector('#billTable tbody');
+      let grandTotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        grandTotal += itemTotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.quantity}</td>
+          <td>₹${item.price}</td>
+          <td>₹${itemTotal}</td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      document.getElementById('grandTotal').textContent = grandTotal;
+    }
+
+    loadBill();
+  </script>
+</body>
+</html>

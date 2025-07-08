@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+     <style>
+    
+.category-card {
+      border: none;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+      background-image: url(images/bg3.jpg);
+      margin-bottom: 30px;
+    }
+    .category-card:hover {
+      transform: translateY(-5px);
+    }
+    .category-card img {
+      border-radius: 15px 15px 0 0;
+      height: 140px;
+      object-fit: cover;
+      padding: 10px;
+    }
+    .category-card .card-body {
+      padding: 12px 8px;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+    }
+     .categories {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .category {
+      text-align: center;
+      width: 100px;
+    }
+
+    .category img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .category span {
+      display: block;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+    <div class="top-bar">
+    <div class="top-left">
+      <div class="icon-text">
+        📞+91 87642 987687
+      </div>
+      <div class="icon-text">
+        <img src="images/whatsapp.ico" alt="WhatsApp">
+        +91 87642 987687
+      </div>
+    </div>
+    <div class="top-center">
+      World Fastest online Shopping Destination
+    </div>
+    <div class="top-right">
+      <div class="dropdown">
+        Current Location ▼
+        <div class="dropdown-menu">
+          <a href="#">Chennai</a>
+          <a href="#">Coimbatore</a>
+          <a href="#">Trichy</a>
+          <a href="#">Salem</a>
+          <a href="#">Tirunelveli</a>
+          <a href="#">Kanchipuram</a>
+          <a href="#">Madurai</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        Account ▼
+        <div class="dropdown-menu">
+          <a href="#">My Profile</a>
+          <a href="#">Orders</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+      <i class="fa-solid fa-circle-user"></i>Login/Register
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="images/cart.jpg" alt="Logo" class="logo">
+      <span class="brand">GroceryHub</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+      <a href="deals.html" class="nav-link">Deals</a>
+    </nav>
+    <div class="header-icons">
+      <button class="icon-btn"><img src="images/search-icon-png-5.png" alt="Search"></button>
+      <button class="icon-btn cart"><a href="cart.html"><img src="images/cart1.png" alt="Cart"></a></button>
+      <button class="icon-btn"><img src="images/heart-58.png" alt="Liked"></button>
+    </div>
+  </header>
+  <div class="categories">
+    
+    <div class="category">
+     <img src="images/cart.jpg" alt="Grocery" class="logo">
+      <span>Grocery</span>
+    </div>
+    <div class="category">
+      <img src="images/fuveg.jpg" alt="Fruits & Vegetables">
+      <span>Fruits & Vegetables</span>
+    </div>
+    
+  </div>
+<div class="container py-4">
+  <p style="color: #6ebd44; font-weight: bold; font-size: 1rem;">
+  <img src="images/cart.jpg" class="logo"> Grocery
+</p>
+  <div class="row g-3">
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+        <a href="rice.html"><img src="images/rice.jpg" class="card-img-top" alt="Rice"></a>
+        <div class="card-body">Rice</div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+        <a href="oil.html"><img src="images/oil.jpg" class="card-img-top" alt="Cooking Oil"></a>
+        <div class="card-body">Cooking Oil</div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+        <a href="ghee.html"><img src="images/ghee.jpg" class="card-img-top" alt="Ghee & Vanaspati"></a>
+        <div class="card-body">Ghee</div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+        <img src="images/sugar.jpg" class="card-img-top" alt="Sugar">
+        <div class="card-body">Sugar</div>
+      </div>
+    </div>
+  </div>
+ <p style="color: #6ebd44; font-weight: bold; font-size: 1rem;">
+  <img src="images/fuveg.jpg" class="logo"> Fruits & Vegetables
+</p>
+  <div class="row g-3">
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+        
+        <a href="vegetables.html"><img src="images/vegtable.jpg" class="card-img-top" alt="vegtable"></a>
+        <div class="card-body">Fresh Vegetables</div>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="card category-card">
+       <a href="fruits.html"><img src="images/fruit.jpg" class="card-img-top" alt="Fruits"></a> 
+        <div class="card-body">Fresh Fruits</div>
+      </div>
+    </div>
+</div>
+
+  <footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="images/cart.jpg" alt="GroceryHub logo" class="footer-logo">
+      <h2>GroceryHub</h2>
+      <p>
+        GroceryHub brings its customers low prices every day. We offer a wide choice...
+        <!-- truncated text -->
+      </p>
+      <ul class="footer-contact">
+        <li><span class="icon">✉️</span> business@groceryhub.com</li>
+        <li><span class="icon">🌐</span> www.Grocery.in</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Our Services</h3>
+      <ul>
+        <li><a href="#">Your Account</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Store List</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Let Us Help You</h3>
+      <ul>
+        <li><a href="#">Help & Support</a></li>
+        <li><a href="#">Share Feedback</a></li>
+        <li><a href="#">Call Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Return & Refund</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#" class="icon-btn">📘</a>
+        <a href="#" class="icon-btn">❌</a>
+        <a href="#" class="icon-btn">📸</a>
+        <a href="#" class="icon-btn">💼</a>
+      </div>
+      <div class="app-links">
+        <a href="#"><img class="fimage " src="images/both.png" alt="App Store"></a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© GroceryHub | All rights Reserved</p>
+  </div>
+</footer>
+
+</body>
+</html>

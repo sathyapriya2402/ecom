@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+      body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ed;
+      margin: 20px;
+    }
+    .container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .card {
+      background: #d3f0c8;
+      border-radius: 10px;
+      width: 160px;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+    .card h4 {
+      margin: 10px 0 5px;
+    }
+    .card p {
+      margin: 0;
+      font-size: 13px;
+    }
+    .price {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .add-btn {
+      margin-top: 10px;
+      background: #fff;
+      border: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .qty-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.qty-controls button {
+  background-color: #fff;
+  border: 1px solid #6ebd44;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6ebd44;
+}
+
+.qty-controls span {
+  font-weight: bold;
+}
+
+    .cart {
+      margin-top: 30px;
+    }
+
+    </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <div class="icon-text">
+        📞+91 87642 987687
+      </div>
+      <div class="icon-text">
+        <img src="images/whatsapp.ico" alt="WhatsApp">
+        +91 87642 987687
+      </div>
+    </div>
+    <div class="top-center">
+      World Fastest online Shopping Destination
+    </div>
+    <div class="top-right">
+      <div class="dropdown">
+        Current Location ▼
+        <div class="dropdown-menu">
+          <a href="#">Chennai</a>
+          <a href="#">Coimbatore</a>
+          <a href="#">Trichy</a>
+          <a href="#">Salem</a>
+          <a href="#">Tirunelveli</a>
+          <a href="#">Kanchipuram</a>
+          <a href="#">Madurai</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        Account ▼
+        <div class="dropdown-menu">
+          <a href="#">My Profile</a>
+          <a href="#">Orders</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+      <i class="fa-solid fa-circle-user"></i>Login/Register
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="logo-section">
+      <img src="images/cart.jpg" alt="Logo" class="logo">
+      <span class="brand">GroceryHub</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+      <a href="deals.html" class="nav-link">Deals</a>
+    </nav>
+    <div class="header-icons">
+      <button class="icon-btn"><img src="images/search-icon-png-5.png" alt="Search"></button>
+      <button class="icon-btn cart"><a href="checkcart.html"><img src="images/cart1.png" alt="Cart"></a></button>
+      <button class="icon-btn"><img src="images/heart-58.png" alt="Liked"></button>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fresh Groceries Delivered<br />To Your DoorStep</h1>
+      <p>Emphasizing the Store’s Commitment to providing fresh Produce and Product Daily.</p>
+      <button class="btn-primary">Shop Now</button>
+    </div>
+    <div class="hero-image">
+      <div class="image-wrapper">
+        <img src="images/deliguy.jpg" alt="Delivery Guy">
+      </div>
+      </div> </section>
+      <h2>Fruits Available</h2>
+  <div class="container" id="productContainer"></div>
+
+  
+
+  <script>
+  const products = [
+    { name: "Apple Royalgala", weight: "500 GM", price: 124, img: "images/royal gala.jpg",link: "des-gala.html", quantity: 0 },
+    { name: "Apple Shimla", weight: "500 GM", price: 114, img: "images/simla.jpg",link: "des-simla.html", quantity: 0 },
+    { name: "Banana Robusta", weight: "500 GM", price: 27, img: "images/rbanana.jpg",link: "desi-robusta.html", quantity: 0 },
+    { name: "Banana Yelakki", weight: "500 GM", price: 62, img: "images/ybanana.jpg",link: "des-yelaki.html", quantity: 0 },
+    { name: "Orange Nagpur", weight: "500 GM", price: 59, img: "images/norange.jpg",link: "des-orange.html", quantity: 0 },
+    { name: "Guava Prepack", weight: "300 GM", price: 38, img: "images/guava.jpg",link: "des-guava.html", quantity: 0 }
+  ];
+
+ const savedCart = JSON.parse(localStorage.getItem('cart'));
+if (savedCart) {
+  savedCart.forEach(savedItem => {
+    const match = products.find(p => p.name === savedItem.name);
+    if (match) match.quantity = savedItem.quantity;
+  });
+}
+
+function showProducts() {
+  const container = document.getElementById('productContainer');
+  container.innerHTML = '';
+  products.forEach((product, index) => {
+    container.innerHTML += `
+      <div class="card">
+        <a href="${product.link}">
+  <img src="${product.img}" alt="${product.name}">
+</a>
+        <h4>${product.name}</h4>
+        <p>${product.weight}</p>
+        <p class="price">₹${product.price}</p>
+        <div class="qty-controls">
+          <button onclick="decreaseQty(${index})">–</button>
+          <span>${product.quantity}</span>
+          <button onclick="increaseQty(${index})">+</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function updateCartStorage() {
+  const cartItems = products.filter(product => product.quantity > 0);
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+function increaseQty(index) {
+  products[index].quantity++;
+  showProducts();
+  updateCartStorage();
+}
+
+function decreaseQty(index) {
+  if (products[index].quantity > 0) {
+    products[index].quantity--;
+    showProducts();
+    updateCartStorage(); 
+  }
+}
+
+showProducts();
+</script>
+    
+ 
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="images/cart.jpg" alt="GroceryHub logo" class="footer-logo">
+      <h2>GroceryHub</h2>
+      <p>
+        GroceryHub brings its customers low prices every day. We offer a wide choice...
+  
+      </p>
+      <ul class="footer-contact">
+        <li><span class="icon">✉️</span> business@groceryhub.com</li>
+        <li><span class="icon">🌐</span> www.Grocery.in</li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Our Services</h3>
+      <ul>
+        <li><a href="#">Your Account</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Store List</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Let Us Help You</h3>
+      <ul>
+        <li><a href="#">Help & Support</a></li>
+        <li><a href="#">Share Feedback</a></li>
+        <li><a href="#">Call Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Return & Refund</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+      <h3>Connect With Us</h3>
+      <div class="social-icons">
+        <a href="#" class="icon-btn">📘</a>
+        <a href="#" class="icon-btn">❌</a>
+        <a href="#" class="icon-btn">📸</a>
+        <a href="#" class="icon-btn">💼</a>
+      </div>
+      <div class="app-links">
+        <a href="#"><img class="fimage " src="images/both.png" alt="App Store"></a>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© GroceryHub | All rights Reserved</p>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
